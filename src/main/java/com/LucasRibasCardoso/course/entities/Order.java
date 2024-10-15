@@ -21,18 +21,13 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @JsonFormat(
-      shape = JsonFormat.Shape.STRING,
-      pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",
-      timezone = "GMT"
-  )
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
   private Instant moment;
 
   private Integer orderStatus;
@@ -120,4 +115,12 @@ public class Order implements Serializable {
     return Objects.hashCode(getId());
   }
 
+  public Double getTotal() {
+    Double sum = 0.0;
+
+    for (OrderItem item : items) {
+      sum += item.getSubTotal();
+    }
+    return sum;
+  }
 }

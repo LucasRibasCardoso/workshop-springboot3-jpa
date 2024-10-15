@@ -20,6 +20,10 @@ public class UserService {
 
   public User findById(Long id) {
     Optional<User> user = userRepository.findById(id);
-    return user.orElse(null); // retorna o usuário, ou caso nao for encontrado, retorna null
+    return user.orElse(null);
+  }
+
+  public User save(User user) {
+    return userRepository.save(user);
   }
 }
