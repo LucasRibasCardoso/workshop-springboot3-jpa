@@ -23,8 +23,6 @@ public class UserResource {
 
   @Autowired
   private UserService userService;
-  @Autowired
-  private UserRepository userRepository;
 
   @GetMapping
   public ResponseEntity<List<User>> findAll(){
@@ -54,7 +52,7 @@ public class UserResource {
     return ResponseEntity.noContent().build();
   }
 
-  @PutMapping(value = "{id}")
+  @PutMapping(value = "/{id}")
   public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
     user = userService.update(id, user);
     return ResponseEntity.ok().body(user);
